@@ -19,3 +19,4 @@ spec:
                         operator: In
                         values:
                             - us-east-1a
+    storageClassName: 'kops-csi-1-21'
