@@ -17,9 +17,6 @@ spec:
             containers:
                 - name: vprodb
                   image: bond50/vprofile-db:latest
-                  volumeMounts:
-                      - mountPath: /var/lib/mysql
-                        name: vpro-db-data
                   ports:
                       - name: vprodb-port
                         containerPort: 3306
@@ -29,12 +26,9 @@ spec:
                             secretKeyRef:
                                 name: app-secret
                                 key: db-pass
-            nodeSelector:
-                zone: us-east-1a
-            volumes:
-                - name: vpro-db-data
-                  volumeID: vol-0f72cb8ec19846f86
-                  fsType: ext4
+                  volumeMounts:
+                      - mountPath: /var/lib/mysql
+                        name: vpro-db-data
             initContainers:
                 - name: busybox
                   image: busybox:latest
@@ -42,3 +36,9 @@ spec:
                   volumeMounts:
                       - name: vpro-db-data
                         mountPath: /var/lib/mysql
+            nodeSelector:
+                zone: us-east-1a
+            volumes:
+                - name: vpro-db-data
+                  persistentVolumeClaim:
+                      claimName: vprodb-pvc
