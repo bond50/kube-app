@@ -9,3 +9,4 @@ spec:
         requests:
             storage: 3Gi
     volumeName: vprodb-pv
+    storageClassName: ''
