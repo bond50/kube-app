@@ -1,29 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: vprodb
+    name: vprodb # Name of the Deployment
 spec:
-    replicas: 1
+    replicas: 1 # Number of pod replicas
     selector:
         matchLabels:
-            app: vprodb
+            app: vprodb # Label to identify the pods
     template:
         metadata:
             labels:
-                app: vprodb
+                app: vprodb # Labels for the pods
         spec:
-            tolerations:
-                - key: 'node-role.kubernetes.io/control-plane'
-                  operator: 'Exists'
-                  effect: 'NoSchedule'
             containers:
-                - name: vprodb
-                  image: bond50/vprofile-db:latest
+                - name: vprodb # Name of the container
+                  image: bond50/vprofile-db:latest # Docker image to use
                   ports:
-                      - containerPort: 3306
-                  env:
+                      - containerPort: 3306 # Port on which the container listens
+                  env: # Environment variables to pass into the container
                       - name: MYSQL_ROOT_PASSWORD
                         valueFrom:
                             secretKeyRef:
-                                name: app-secret
-                                key: db-pass
+                                name: app-secret # Name of the secret
+                                key: db-pass # Key in the secret that contains the password
+                  resources: # Resource requests and limits
+                      requests: # Minimum resources needed by the container
+                          memory: '256Mi' # Request 256 MiB of memory
+                          cpu: '100m' # Request 100 milliCPU
+                      limits: # Maximum resources the container can use
+                          memory: '512Mi' # Limit to 512 MiB of memory
+                          cpu: '200m' # Limit to 200 milliCPU
+                  volumeMounts: # Mount the persistent storage into the container
+                      - mountPath: /var/lib/mysql # Path inside the container
+                        name: vprodb-storage # Name of the volume to mount
+            volumes: # Define the volumes for this deployment
+                - name: vprodb-storage # Name of the volume
+                  persistentVolumeClaim:
+                      claimName: vprodb-pvc # PVC that binds to this volume
+            tolerations: # Tolerations for scheduling
+                - key: 'node-role.kubernetes.io/control-plane'
+                  operator: 'Exists'
+                  effect: 'NoSchedule' # Allow scheduling on control-plane nodes
