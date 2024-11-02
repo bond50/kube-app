@@ -20,7 +20,3 @@ spec:
                         values:
                             - us-east-2a # Allowed zone
     storageClassName: 'kops-csi-1-21' # Storage class name
-    tolerations: # Tolerations for scheduling on nodes with specific taints
-        - key: 'node-role.kubernetes.io/control-plane'
-          operator: 'Exists'
-          effect: 'NoSchedule' # This allows pods to be scheduled on control-plane nodes
