@@ -38,3 +38,5 @@ spec:
                   persistentVolumeClaim:
                       claimName: vprodb-pvc # PVC that binds to this volume
 
+            nodeSelector:
+                zone: us-east-2a
