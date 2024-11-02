@@ -10,5 +10,5 @@ spec:
     persistentVolumeReclaimPolicy: Retain # What happens to the volume when released
 
     awsElasticBlockStore: # Specifies AWS Elastic Block Store as the storage type
-        volumeID: vol-06698acb30990d0a2 # The ID of the AWS volume
+        volumeID: vol-06510efb6f370d8f7 # The ID of the AWS volume
         fsType: ext4 # File system type used on the volume
