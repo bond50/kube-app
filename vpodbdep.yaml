@@ -16,7 +16,8 @@ spec:
                 - name: vprodb # Name of the container
                   image: bond50/vprofile-db:latest # Docker image to use
                   ports:
-                      - containerPort: 3306 # Port on which the container listens
+                      - name: vprodb-port
+                        containerPort: 3306 # Port on which the container listens
                   env: # Environment variables to pass into the container
                       - name: MYSQL_ROOT_PASSWORD
                         valueFrom:
@@ -37,9 +38,7 @@ spec:
                 - name: vprodb-storage # Name of the volume
                   persistentVolumeClaim:
                       claimName: vprodb-pvc # PVC that binds to this volume
-            ports:
-                - name: vprodb-port
-                  containerPort: 3306
+
             tolerations: # Tolerations for scheduling
                 - key: 'node-role.kubernetes.io/control-plane'
                   operator: 'Exists'
