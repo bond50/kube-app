@@ -11,12 +11,12 @@ spec:
     awsElasticBlockStore: # Specifies AWS Elastic Block Store as the storage type
         volumeID: vol-0754b646b3580552e # The ID of the AWS volume
         fsType: ext4 # File system type used on the volume
-    nodeAffinity: # Restricts the volume to specific nodes
-        required:
-            nodeSelectorTerms:
-                - matchExpressions:
-                      - key: topology.kubernetes.io/zone # Affinity based on the zone
-                        operator: In
-                        values:
-                            - us-east-2a # Allowed zone
+    # nodeAffinity: # Restricts the volume to specific nodes
+    #     required:
+    #         nodeSelectorTerms:
+    #             - matchExpressions:
+    #                   - key: topology.kubernetes.io/zone # Affinity based on the zone
+    #                     operator: In
+    #                     values:
+    #                         - us-east-2a # Allowed zone
     storageClassName: 'kops-csi-1-21' # Storage class name
