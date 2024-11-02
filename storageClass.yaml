@@ -1,0 +1,10 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+    name: my-storage-class
+provisioner: ebs.csi.aws.com # Use the CSI driver for EBS
+parameters:
+    type: gp2 # Type of EBS volume (gp2, gp3, io1, etc.)
+    zones: us-east-2a # Specify the zone for the volume
+reclaimPolicy: Delete # Decide what happens when PVC is deleted
+volumeBindingMode: WaitForFirstConsumer # Bind the volume only after a pod is scheduled
