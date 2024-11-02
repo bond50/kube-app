@@ -3,6 +3,7 @@ kind: PersistentVolumeClaim
 metadata:
     name: vprodb-pvc # Name of the PVC
 spec:
+    storageClassName: ''
     accessModes:
         - ReadWriteOnce # This claim can be used by a single node in read-write mode
     resources:
