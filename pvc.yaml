@@ -3,10 +3,9 @@ kind: PersistentVolumeClaim
 metadata:
     name: vprodb-pvc # Name of the PVC
 spec:
-    storageClassName: ''
     accessModes:
         - ReadWriteOnce # This claim can be used by a single node in read-write mode
     resources:
         requests:
             storage: 3Gi # The amount of storage requested
-
+    storageClassName: 'kops-csi-1-21' # The storage class to use

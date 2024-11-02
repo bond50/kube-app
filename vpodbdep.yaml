@@ -37,6 +37,7 @@ spec:
                 - name: vprodb-storage # Name of the volume
                   persistentVolumeClaim:
                       claimName: vprodb-pvc # PVC that binds to this volume
-
-            nodeSelector:
-                zone: us-east-2a
+            tolerations: # Tolerations for scheduling
+                - key: 'node-role.kubernetes.io/control-plane'
+                  operator: 'Exists'
+                  effect: 'NoSchedule' # Allow scheduling on control-plane nodes
