@@ -7,5 +7,5 @@ spec:
         app: vprodb
     ports:
         - port: 3306
-          targetPort: containerPort
+          targetPort: 3306
           protocol: TCP
