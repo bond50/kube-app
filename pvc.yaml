@@ -8,4 +8,4 @@ spec:
     resources:
         requests:
             storage: 3Gi # The amount of storage requested
-    storageClassName: 'kops-csi-1-21' # The storage class to use
+

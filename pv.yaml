@@ -8,19 +8,19 @@ spec:
     accessModes:
         - ReadWriteOnce # This volume can be mounted as read-write by a single node
     persistentVolumeReclaimPolicy: Retain # What happens to the volume when released
+
     awsElasticBlockStore: # Specifies AWS Elastic Block Store as the storage type
-        volumeID: vol-0f72cb8ec19846f86 # The ID of the AWS volume
+        volumeID: vol-0c3719e5b0cf8edfc # The ID of the AWS volume
         fsType: ext4 # File system type used on the volume
-    nodeAffinity: # Restricts the volume to specific nodes
-        required:
-            nodeSelectorTerms:
-                - matchExpressions:
-                      - key: topology.kubernetes.io/zone # Affinity based on the zone
-                        operator: In
-                        values:
-                            - us-east-1a # Allowed zone
-    storageClassName: 'kops-csi-1-21' # Storage class name
-    tolerations: # Tolerations for scheduling on nodes with specific taints
-        - key: 'node-role.kubernetes.io/control-plane'
-          operator: 'Exists'
-          effect: 'NoSchedule' # This allows pods to be scheduled on control-plane nodes
+    # nodeAffinity: # Restricts the volume to specific nodes
+    #     required:
+    #         nodeSelectorTerms:
+    #             - matchExpressions:
+    #                   - key: topology.kubernetes.io/zone # Affinity based on the zone
+    #                     operator: In
+    #                     values:
+    #                         - us-east-2a # Allowed zone
+    # tolerations: # Tolerations for scheduling on nodes with specific taints
+    #     - key: 'node-role.kubernetes.io/control-plane'
+    #       operator: 'Exists'
+    #       effect: 'NoSchedule' # This allows pods to be scheduled on control-plane nodes
